@@ -1,17 +1,38 @@
 $(document).ready(function () {
 
-    $("#regForm").submit(function () {
+  $("#regForm").on("submit", function (e) {
+    let isValid = true;
+    $("#error-msg").text("");
 
-        let phone = $("input[name='phone']").val();
-        let regPhone = /^[0-9]{10}$/;
+    $("input, textarea, select").removeClass("error");
+    $(".field-error").text("");
 
-        if (!regPhone.test(phone)) {
-            alert("Phone number must be 10 digits.");
-            return false;
-        }
+    const name = $("#name").val().trim();
+    const email = $("#email").val().trim();
 
-        alert("Form submitted successfully!");
-        return true;  
-    });
+    if (name === "") {
+      setFieldError("#name", "Please enter your full name.");
+      isValid = false;
+    }
+
+    if (email === "") {
+      setFieldError("#email", "Please enter your email address.");
+      isValid = false;
+    } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+      setFieldError("#email", "Please enter a valid email address.");
+      isValid = false;
+    }
+
+    if (!isValid) {
+      e.preventDefault();
+      $("#error-msg").text("Please correct the highlighted fields and try again.");
+    }
+  });
+
+  function setFieldError(selector, message) {
+    const input = $(selector);
+    input.addClass("error");
+    input.closest(".form-group").find(".field-error").text(message);
+  }
 
 });
