@@ -1,45 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Online Registration Form</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="script.js"></script>
+  <meta charset="UTF-8" />
+  <title>Online Registration Form</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
 
-<div class="container">
+  <header class="topbar">
     <h1>Online Registration Form</h1>
+    <p class="subtitle">Please fill in your details to complete the registration.</p>
+  </header>
 
-    <form action="process.php" method="POST" id="regForm">
-        
-        <label>Full Name:</label>
-        <input type="text" name="name" required>
+  <main class="page">
+    <section class="form-card">
+      <h2 class="form-title">Student Registration</h2>
 
-        <label>Email Address:</label>
-        <input type="email" name="email" required>
+      <form id="regForm" action="process.php" method="post" novalidate>
+        <!-- Full Name -->
+        <div class="form-group">
+          <label for="name">Full Name <span class="required">*</span></label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+          <small class="field-error"></small>
+        </div>
 
-        <label>Phone Number:</label>
-        <input type="text" name="phone" required>
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email <span class="required">*</span></label>
+          <input type="email" id="email" name="email" placeholder="example@domain.com" required>
+          <small class="field-error"></small>
+        </div>
 
-        <label>Date of Birth:</label>
-        <input type="date" name="dob" required>
+        <!-- Mobile -->
+        <div class="form-group">
+          <label for="phone">Mobile Number</label>
+          <input type="text" id="phone" name="phone" placeholder="e.g. 7892130363">
+          <small class="field-error"></small>
+        </div>
 
-        <label>Gender:</label>
-        <select name="gender" required>
-            <option value="">Select</option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-        </select>
+        <!-- Course -->
+        <div class="form-group">
+          <label for="course">Course Applying For</label>
+          <select id="course" name="course">
+            <option value="CSE">B.E – CSE</option>
+            <option value="ECE">B.E – ECE</option>
+            <option value="MECH">B.E – MECH</option>
+            <option value="CIVIL">B.E – CIVIL</option>
+          </select>
+        </div>
 
-        <label>Address:</label>
-        <textarea name="address" required></textarea>
+        <!-- Gender -->
+        <div class="form-group">
+          <label>Gender</label>
+          <div class="inline-options">
+            <label><input type="radio" name="gender" value="Male" checked> Male</label>
+            <label><input type="radio" name="gender" value="Female"> Female</label>
+            <label><input type="radio" name="gender" value="Other"> Other</label>
+          </div>
+        </div>
 
-        <button type="submit">Submit Application</button>
-    </form>
-</div>
+        <!-- Hobbies -->
+        <div class="form-group">
+          <label>Hobbies</label>
+          <div class="inline-options">
+            <label><input type="checkbox" name="hobbies[]" value="Reading"> Reading</label>
+            <label><input type="checkbox" name="hobbies[]" value="Sports"> Sports</label>
+            <label><input type="checkbox" name="hobbies[]" value="Music"> Music</label>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group">
+          <label for="address">Address</label>
+          <textarea id="address" name="address" rows="3" placeholder="Your full postal address"></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn">Submit Application</button>
+
+        <p id="error-msg" class="global-error"></p>
+        <p class="note"><span class="required">*</span> indicates required fields</p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Registration Portal</p>
+  </footer>
 
 </body>
 </html>
