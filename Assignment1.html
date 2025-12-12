@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madan - Software Engineer Profile</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJ8jJ0b1T6d/0+gQ/A2v8U6K2/A+t/QoK2K0k/kQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        /* Custom Colors and Font Configuration */
+        :root {
+            --primary-blue: #3b82f6; 
+            --accent-teal: #14b8a6; 
+            --background-light: #f3f4f6;
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-light);
+            color: #1f2937;
+        }
+
+        /* Page Transition Effect */
+        .page-container {
+            min-height: 80vh;
+            padding: 2rem 1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Styling for Sections */
+        .section-header-icon {
+            color: var(--accent-teal);
+            margin-right: 0.75rem;
+        }
+
+        /* Gradient for Resume Header */
+        .resume-header {
+            background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 1rem 1rem 0 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header and Navigation Bar (Sticky and Stylish) -->
+    <header class="bg-white shadow-xl sticky top-0 z-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-3">
+            <h1 class="text-2xl font-extrabold text-gray-900 tracking-wider">
+                MADAN <span class="text-blue-600">SHERIGAR</span>
+            </h1>
+            <nav>
+                <button onclick="showPage('resume')" id="nav-resume"
+                        class="nav-btn bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                    <i class="fas fa-file-lines mr-2"></i> Resume
+                </button>
+                <button onclick="showPage('biodata')" id="nav-biodata"
+                        class="nav-btn ml-3 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 font-semibold py-2 px-5 rounded-full transition duration-300">
+                    <i class="fas fa-id-card-clip mr-2"></i> Bio-Data
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    
+    <main class="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- RESUME Page Content -->
+        <div id="resume-page" class="page-container active bg-white shadow-2xl rounded-2xl overflow-hidden">
+            
+            <!-- Professional Header -->
+            <div class="resume-header">
+                <h2 class="text-4xl font-bold mb-1">Madan</h2>
+                <p class="text-xl font-light text-blue-100">Software Engineering Student | Aspiring Java Developer</p>
+            </div>
+
+            <div class="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Left Column (Contact, Skills, Objective) - Sticky on large screens -->
+                <div class="lg:col-span-1 space-y-8">
+
+                    <!-- Contact & Summary -->
+                    <section class="p-4 rounded-xl bg-gray-50 shadow-md">
+                        <h3 class="text-xl font-bold text-gray-700 mb-4 flex items-center border-b pb-2">
+                            <i class="fas fa-address-book section-header-icon"></i> Contact & Objective
+                        </h3>
+                        <div class="text-sm space-y-2 text-gray-600">
+                            <p><i class="fas fa-mobile-alt w-5 text-blue-500"></i> (+91) 9008365538</p>
+                            <p><i class="fas fa-envelope w-5 text-blue-500"></i> <a href="mailto:madansherigar538@gmail.com" class="hover:text-blue-600">madansherigar538@gmail.com</a></p>
+                            <p><i class="fab fa-linkedin w-5 text-blue-500"></i> <a href="#" class="hover:text-blue-600 cursor-not-allowed" title="Link not active">/in/madan-sherigar</a></p>
+                            <p><i class="fas fa-location-dot w-5 text-blue-500"></i> Udupi, Karnataka</p>
+                        </div>
+                        
+                        <p class="mt-5 p-3 border-l-4 border-accent-teal bg-teal-50 rounded-lg text-sm italic text-gray-700 shadow-sm">
+                            Aspiring to join a dynamic organization where I can leverage my strong foundational knowledge in Java development and programming skills (C, Python) to contribute to innovative projects and achieve significant professional growth.
+                        </p>
+                    </section>
+
+                    <!-- Technical Skills -->
+                    <section class="p-4 rounded-xl bg-gray-50 shadow-md">
+                        <h3 class="text-xl font-bold text-gray-700 mb-4 flex items-center border-b pb-2">
+                            <i class="fas fa-microchip section-header-icon"></i> Technical Skills
+                        </h3>
+                        
+                        <h4 class="text-sm font-semibold text-gray-600 mt-4 mb-2">Languages & Core:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium shadow-md hover:bg-blue-700 transition">Java</span>
+                            <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium shadow-md hover:bg-blue-700 transition">C Programming</span>
+                            <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium shadow-md hover:bg-blue-700 transition">Python</span>
+                        </div>
+
+                        <h4 class="text-sm font-semibold text-gray-600 mt-4 mb-2">Web & Database:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-accent-teal text-white px-3 py-1 rounded-full text-xs font-medium shadow-md hover:bg-teal-600 transition">HTML</span>
+                            <span class="bg-accent-teal text-white px-3 py-1 rounded-full text-xs font-medium shadow-md hover:bg-teal-600 transition">CSS</span>
+                            <span class="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-medium shadow-md hover:bg-red-600 transition">MySQL</span>
+                            <span class="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-medium shadow-md hover:bg-red-600 transition">MongoDB</span>
+                        </div>
+                    </section>
+                    
+                    <!-- Soft Skills -->
+                    <section class="p-4 rounded-xl bg-gray-50 shadow-md">
+                        <h3 class="text-xl font-bold text-gray-700 mb-4 flex items-center border-b pb-2">
+                            <i class="fas fa-handshake section-header-icon"></i> Soft Skills
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-600 text-white px-3 py-1 rounded-full text-xs font-medium">Communication</span>
+                            <span class="bg-gray-600 text-white px-3 py-1 rounded-full text-xs font-medium">Adaptability</span>
+                            <span class="bg-gray-600 text-white px-3 py-1 rounded-full text-xs font-medium">Problem Solving</span>
+                            <span class="bg-gray-600 text-white px-3 py-1 rounded-full text-xs font-medium">Teamwork</span>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right Column (Education and Projects) -->
+                <div class="lg:col-span-2 space-y-8">
+
+                    <!-- Education Timeline -->
+                    <section>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                            <i class="fas fa-graduation-cap section-header-icon text-2xl"></i> Educational Background
+                        </h3>
+
+                        <div class="relative border-l-4 border-blue-200 space-y-8">
+                            
+                            <!-- B.Tech Entry -->
+                            <div class="ml-6 p-4 bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 relative before:content-[''] before:absolute before:-left-[9px] before:top-4 before:h-4 before:w-4 before:bg-blue-600 before:rounded-full before:border-2 before:border-white">
+                                <span class="text-sm font-semibold text-blue-600 bg-blue-100 px-3 py-1 rounded-full absolute top-2 right-2">In Progress</span>
+                                <h4 class="text-xl font-bold text-gray-900 mb-1">B.E. / B.Tech (Engineering)</h4>
+                                <p class="text-sm font-medium text-gray-600 mb-2">Shri Madhwa Vadiraja Institute of Technology & Management (SMVITM)</p>
+                                <p class="text-xs text-gray-500">Focus on core engineering principles and project-based learning.</p>
+                            </div>
+
+                            <!-- 12th Grade Entry -->
+                            <div class="ml-6 p-4 bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 relative before:content-[''] before:absolute before:-left-[9px] before:top-4 before:h-4 before:w-4 before:bg-blue-600 before:rounded-full before:border-2 before:border-white">
+                                <span class="text-sm font-semibold text-blue-600 bg-blue-100 px-3 py-1 rounded-full absolute top-2 right-2">Completed</span>
+                                <h4 class="text-xl font-bold text-gray-900 mb-1">Pre-University Course (12th Grade)</h4>
+                                <p class="text-sm font-medium text-gray-600 mb-2">Bhandarkar's Pre-University College, Kundapura</p>
+                                <p class="text-xs text-gray-500">Udupi</p>
+                            </div>
+
+                            <!-- 10th Grade Entry -->
+                            <div class="ml-6 p-4 bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 relative before:content-[''] before:absolute before:-left-[9px] before:top-4 before:h-4 before:w-4 before:bg-blue-600 before:rounded-full before:border-2 before:border-white">
+                                <span class="text-sm font-semibold text-blue-600 bg-blue-100 px-3 py-1 rounded-full absolute top-2 right-2">Completed</span>
+                                <h4 class="text-xl font-bold text-gray-900 mb-1">High School (10th Grade)</h4>
+                                <p class="text-sm font-medium text-gray-600 mb-2">GHS Basrur</p>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <!-- Projects Section -->
+                    <section>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                            <i class="fas fa-laptop-code section-header-icon text-2xl"></i> Key Academic Projects
+                        </h3>
+
+                        <div class="space-y-4">
+                            <!-- Project 1 -->
+                            <div class="p-4 border-l-4 border-accent-teal bg-white rounded-lg shadow-md hover:bg-teal-50 transition duration-300">
+                                <h5 class="font-bold text-lg text-gray-900 flex items-center"><i class="fas fa-network-wired text-blue-500 mr-3"></i> Smart Air Net Project</h5>
+                                <p class="text-sm text-gray-600 mt-1">A system designed for efficient resource management and networking in a controlled environment, demonstrating IoT and network protocols knowledge.</p>
+                            </div>
+                            <!-- Project 2 -->
+                            <div class="p-4 border-l-4 border-accent-teal bg-white rounded-lg shadow-md hover:bg-teal-50 transition duration-300">
+                                <h5 class="font-bold text-lg text-gray-900 flex items-center"><i class="fas fa-calendar-check text-blue-500 mr-3"></i> Attendance Management System</h5>
+                                <p class="text-sm text-gray-600 mt-1">Developed a robust system to track and manage attendance using front-end technologies and database integration (SQL), improving administrative efficiency.</p>
+                            </div>
+                            <!-- Project 3 -->
+                            <div class="p-4 border-l-4 border-accent-teal bg-white rounded-lg shadow-md hover:bg-teal-50 transition duration-300">
+                                <h5 class="font-bold text-lg text-gray-900 flex items-center"><i class="fas fa-parking text-blue-500 mr-3"></i> Parking Management System</h5>
+                                <p class="text-sm text-gray-600 mt-1">Automated solution for managing parking availability and allocations, utilizing algorithmic logic and interface design.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- BIO-DATA Page Content -->
+        <div id="biodata-page" class="page-container bg-white shadow-2xl rounded-2xl hidden p-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-8 pb-3 border-b-4 border-accent-teal">Personal Bio-Data</h2>
+
+            
+            <section class="mb-10 p-6 bg-blue-50 rounded-xl shadow-md">
+                <h3 class="text-2xl font-bold text-blue-800 mb-5 border-b pb-2 flex items-center"><i class="fas fa-user-circle mr-3"></i> Personal Details</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-gray-700">
+                    <div class="font-semibold flex items-center"><i class="fas fa-user w-5 text-blue-500 mr-2"></i> Full Name:</div><div class="text-gray-800 font-medium">Madan</div>
+                    <div class="font-semibold flex items-center"><i class="fas fa-male w-5 text-blue-500 mr-2"></i> Father's Name:</div><div class="text-gray-800 font-medium">Karunakar Sherigar</div>
+                    <div class="font-semibold flex items-center"><i class="fas fa-calendar-alt w-5 text-blue-500 mr-2"></i> Date of Birth:</div><div class="text-gray-800 font-medium">Feb 13, 2006</div>
+                    <div class="font-semibold flex items-center"><i class="fas fa-venus-mars w-5 text-blue-500 mr-2"></i> Gender:</div><div class="text-gray-800 font-medium">Male</div>
+                    <div class="font-semibold flex items-center"><i class="fas fa-flag w-5 text-blue-500 mr-2"></i> Nationality:</div><div class="text-gray-800 font-medium">Indian</div>
+                    <div class="font-semibold flex items-center"><i class="fas fa-ring w-5 text-blue-500 mr-2"></i> Marital Status:</div><div class="text-gray-800 font-medium">Single</div>
+                </div>
+            </section>
+
+            
+            <section class="mb-10 p-6 bg-gray-50 rounded-xl shadow-md">
+                <h3 class="text-2xl font-bold text-gray-700 mb-5 border-b pb-2 flex items-center"><i class="fas fa-language mr-3"></i> Languages Known</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="bg-teal-200 text-teal-800 px-4 py-1 rounded-full text-md font-medium shadow-sm"><i class="fas fa-check-circle mr-2"></i> English</span>
+                    <span class="bg-teal-200 text-teal-800 px-4 py-1 rounded-full text-md font-medium shadow-sm"><i class="fas fa-check-circle mr-2"></i> Hindi</span>
+                    <span class="bg-teal-200 text-teal-800 px-4 py-1 rounded-full text-md font-medium shadow-sm"><i class="fas fa-check-circle mr-2"></i> Kannada</span>
+                </div>
+            </section>
+
+            
+            <section class="mb-10 p-6 bg-gray-50 rounded-xl shadow-md">
+                <h3 class="text-2xl font-bold text-gray-700 mb-5 border-b pb-2 flex items-center"><i class="fas fa-phone-volume mr-3"></i> Contact Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-gray-700">
+                    <div class="font-semibold flex items-center"><i class="fas fa-phone w-5 text-gray-600 mr-2"></i> Phone:</div><div class="text-gray-800 font-medium">(+91) 9008365538</div>
+                    <div class="font-semibold flex items-center"><i class="fas fa-at w-5 text-gray-600 mr-2"></i> Email:</div><div class="text-gray-800 font-medium"><a href="mailto:madansherigar538@gmail.com" class="text-blue-600 hover:underline">madansherigar538@gmail.com</a></div>
+                    <div class="font-semibold flex items-center"><i class="fab fa-linkedin w-5 text-gray-600 mr-2"></i> LinkedIn:</div><div class="text-gray-800 font-medium"><a href="#" class="text-blue-600 hover:underline cursor-not-allowed">/in/madan-sherigar</a></div>
+                    <div class="font-semibold flex items-center"><i class="fas fa-map-marker-alt w-5 text-gray-600 mr-2"></i> Address:</div><div class="text-gray-800 font-medium">Udupi, Karnataka</div>
+                </div>
+            </section>
+
+        
+            <section class="text-sm mt-8 p-4 border border-gray-300 rounded-lg bg-yellow-50 text-gray-700">
+                <p class="italic">Declaration: I hereby declare that the above-mentioned information is correct to the best of my knowledge and belief.</p>
+                <p class="mt-2 text-right font-bold text-gray-800">Madan</p>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- JavaScript for Page Switching (unchanged logic) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize with the resume page visible
+            showPage('resume');
+        });
+
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page-container');
+            const targetNavId = 'nav-' + pageId;
+            
+            // 1. Hide all pages and start transition for the active one
+            pages.forEach(page => {
+                page.classList.add('hidden');
+                page.classList.remove('active');
+            });
+
+            // 2. Show the requested page
+            const activePage = document.getElementById(pageId + '-page');
+            if (activePage) {
+                activePage.classList.remove('hidden');
+                
+                // Trigger reflow to restart CSS transition (for fade-in/slide-up effect)
+                void activePage.offsetWidth; 
+                activePage.classList.add('active');
+            }
+
+            // 3. Update navigation button styles (highlighting the active tab)
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                const isCurrent = btn.id === targetNavId;
+                
+                // Reset styles to inactive
+                btn.classList.remove('bg-blue-600', 'hover:bg-blue-700', 'text-white', 'shadow-lg', 'transform', 'hover:scale-105');
+                btn.classList.add('bg-white', 'border', 'border-gray-300', 'text-gray-700', 'hover:bg-gray-100');
+
+                if (isCurrent) {
+                    // Apply active styles
+                    btn.classList.remove('bg-white', 'border', 'border-gray-300', 'text-gray-700', 'hover:bg-gray-100');
+                    btn.classList.add('bg-blue-600', 'hover:bg-blue-700', 'text-white', 'shadow-lg', 'transform', 'hover:scale-105');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
