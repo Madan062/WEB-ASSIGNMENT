@@ -1,0 +1,197 @@
+
+/* Reset + base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* Dark theme (toggled by jQuery) */
+body.dark {
+  background: #121212;
+  color: #f5f5f5;
+}
+
+header {
+  background: #1e88e5;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin-bottom: 10px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 8px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+nav a.active,
+nav a:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+main {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 15px 30px 15px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* Card visible class for jQuery animation */
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+body.dark .card {
+  background: #1f1f1f;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+.card h2 {
+  margin-bottom: 10px;
+  color: #1e88e5;
+}
+
+body.dark .card h2 {
+  color: #90caf9;
+}
+
+.highlight {
+  color: #e53935;
+  font-weight: bold;
+}
+
+/* Table styles (for Bio-data) */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+table th,
+table td {
+  border: 1px solid #ccc;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+table th {
+  width: 30%;
+  background: #eeeeee;
+}
+
+body.dark table th {
+  background: #424242;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #eeeeee;
+  font-size: 0.9rem;
+}
+
+body.dark footer {
+  background: #1f1f1f;
+}
+
+/* Button styling */
+button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  background: #1e88e5;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* List styling */
+ul {
+  margin-left: 18px;
+  margin-top: 5px;
+}
+
+ul li {
+  margin-bottom: 5px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.3rem;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 4px 4px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  table th,
+  table td {
+    font-size: 0.85rem;
+  }
+}
+/* Photo styling for index, resume, biodata */
+.profile-photo {
+  width: 120px;        /* control how wide the photo is */
+  height: 150px;       /* fixed height for neat passport-style look */
+  object-fit: cover;   /* crops image nicely without distortion */
+  border-radius: 8px;  /* slightly rounded corners */
+  border: 2px solid #1e88e5;
+  display: block;
+  margin: 8px auto 0;  /* center the image inside its card */
+}
+
+/* Center the photo section headings */
+.photo-card h2 {
+  text-align: center;
+}
+
+/* For biodata page photo wrapper */
+.photo-box {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Make the photo a bit smaller on very small screens */
+@media (max-width: 600px) {
+  .profile-photo {
+    width: 90px;
+    height: 110px;
+  }
+}
