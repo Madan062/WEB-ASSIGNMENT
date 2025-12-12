@@ -1,220 +1,198 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+// Enable error reporting for debugging (disable in production)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Registration Form</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
+// Set header for JSON response
+header('Content-Type: application/json');
 
-<body>
-    <div class="container">
-        <div class="form-container" id="formContainer">
-            <h1>Student Registration Form</h1>
-            <p class="subtitle">Please fill in all the required fields</p>
+// Function to sanitize input data
+function sanitizeInput($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
+    return $data;
+}
 
-            <form id="registrationForm" method="POST" action="process.php">
-                <!-- Personal Information -->
-                <div class="section">
-                    <h2>Personal Information</h2>
+// Function to validate email
+function validateEmail($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
 
-                    <div class="form-group">
-                        <label for="fullName">Full Name <span class="required">*</span></label>
-                        <input type="text" id="fullName" name="fullName" required>
-                    </div>
+// Function to validate phone number (10 digits)
+function validatePhone($phone) {
+    return preg_match('/^[0-9]{10}$/', $phone);
+}
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email Address <span class="required">*</span></label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
+// Function to validate pincode (6 digits)
+function validatePincode($pincode) {
+    return preg_match('/^[0-9]{6}$/', $pincode);
+}
 
-                        <div class="form-group">
-                            <label for="phone">Phone Number <span class="required">*</span></label>
-                            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="dob">Date of Birth <span class="required">*</span></label>
-                            <input type="date" id="dob" name="dob" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="gender">Gender <span class="required">*</span></label>
-                            <select id="gender" name="gender" required>
-                                <option value="">Select Gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address">Address <span class="required">*</span></label>
-                        <textarea id="address" name="address" rows="3" required></textarea>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="city">City <span class="required">*</span></label>
-                            <input type="text" id="city" name="city" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="state">State <span class="required">*</span></label>
-                            <input type="text" id="state" name="state" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="pincode">Pincode <span class="required">*</span></label>
-                            <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" required>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Educational Information -->
-                <div class="section">
-                    <h2>Educational Information</h2>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="qualification">Highest Qualification <span class="required">*</span></label>
-                            <select id="qualification" name="qualification" required>
-                                <option value="">Select Qualification</option>
-                                <option value="10th">10th Standard</option>
-                                <option value="12th">12th Standard</option>
-                                <option value="Undergraduate">Undergraduate</option>
-                                <option value="Postgraduate">Postgraduate</option>
-                                <option value="Doctoral">Doctoral</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="institution">Institution Name <span class="required">*</span></label>
-                            <input type="text" id="institution" name="institution" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="yearOfPassing">Year of Passing <span class="required">*</span></label>
-                            <input type="number" id="yearOfPassing" name="yearOfPassing" min="1950" max="2030" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="percentage">Percentage/CGPA <span class="required">*</span></label>
-                            <input type="text" id="percentage" name="percentage" required>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Course Selection -->
-                <div class="section">
-                    <h2>Course Selection</h2>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="course">Select Course <span class="required">*</span></label>
-                            <select id="course" name="course" required>
-                                <option value="">Select Course</option>
-                                <option value="Computer Science">Computer Science</option>
-                                <option value="Information Technology">Information Technology</option>
-                                <option value="Electronics">Electronics & Communication</option>
-                                <option value="Mechanical">Mechanical Engineering</option>
-                                <option value="Civil">Civil Engineering</option>
-                                <option value="Electrical">Electrical Engineering</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="batch">Preferred Batch <span class="required">*</span></label>
-                            <select id="batch" name="batch" required>
-                                <option value="">Select Batch</option>
-                                <option value="Morning">Morning (8:00 AM - 12:00 PM)</option>
-                                <option value="Afternoon">Afternoon (1:00 PM - 5:00 PM)</option>
-                                <option value="Evening">Evening (6:00 PM - 9:00 PM)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Additional Information -->
-                <div class="section">
-                    <h2>Additional Information</h2>
-
-                    <div class="form-group">
-                        <label>Interested Areas (Select all that apply)</label>
-                        <div class="checkbox-group">
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="interests[]" value="Web Development"> Web Development
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="interests[]" value="Mobile Development"> Mobile Development
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="interests[]" value="Data Science"> Data Science
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="interests[]" value="AI/ML"> Artificial Intelligence &
-                                Machine Learning
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="interests[]" value="Cyber Security"> Cyber Security
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="interests[]" value="Cloud Computing"> Cloud Computing
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="comments">Additional Comments</label>
-                        <textarea id="comments" name="comments" rows="4"
-                            placeholder="Any additional information you'd like to share..."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="terms" name="terms" required>
-                            I agree to the terms and conditions <span class="required">*</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Form Actions -->
-                <div class="form-actions">
-                    <button type="reset" class="btn btn-secondary">Reset Form</button>
-                    <button type="submit" class="btn btn-primary">Submit Application</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Success Display Container (Hidden by default) -->
-        <div class="success-container" id="successContainer" style="display: none;">
-            <div class="success-header">
-                <svg class="success-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                    <polyline points="22 4 12 14.01 9 11.01" />
-                </svg>
-                <h1>Registration Successful!</h1>
-                <p>Thank you for registering. Here are your submitted details:</p>
-            </div>
-
-            <div id="displayData"></div>
-
-            <div class="form-actions">
-                <button onclick="location.reload()" class="btn btn-primary">Submit Another Application</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-
-</html>
+// Check if the request is POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    // Initialize response array
+    $response = array();
+    $errors = array();
+    
+    // Validate and sanitize Personal Information
+    $fullName = isset($_POST['fullName']) ? sanitizeInput($_POST['fullName']) : '';
+    if (empty($fullName)) {
+        $errors[] = "Full name is required";
+    }
+    
+    $email = isset($_POST['email']) ? sanitizeInput($_POST['email']) : '';
+    if (empty($email)) {
+        $errors[] = "Email is required";
+    } elseif (!validateEmail($email)) {
+        $errors[] = "Invalid email format";
+    }
+    
+    $phone = isset($_POST['phone']) ? sanitizeInput($_POST['phone']) : '';
+    if (empty($phone)) {
+        $errors[] = "Phone number is required";
+    } elseif (!validatePhone($phone)) {
+        $errors[] = "Phone number must be 10 digits";
+    }
+    
+    $dob = isset($_POST['dob']) ? sanitizeInput($_POST['dob']) : '';
+    if (empty($dob)) {
+        $errors[] = "Date of birth is required";
+    }
+    
+    $gender = isset($_POST['gender']) ? sanitizeInput($_POST['gender']) : '';
+    if (empty($gender)) {
+        $errors[] = "Gender is required";
+    }
+    
+    $address = isset($_POST['address']) ? sanitizeInput($_POST['address']) : '';
+    if (empty($address)) {
+        $errors[] = "Address is required";
+    }
+    
+    $city = isset($_POST['city']) ? sanitizeInput($_POST['city']) : '';
+    if (empty($city)) {
+        $errors[] = "City is required";
+    }
+    
+    $state = isset($_POST['state']) ? sanitizeInput($_POST['state']) : '';
+    if (empty($state)) {
+        $errors[] = "State is required";
+    }
+    
+    $pincode = isset($_POST['pincode']) ? sanitizeInput($_POST['pincode']) : '';
+    if (empty($pincode)) {
+        $errors[] = "Pincode is required";
+    } elseif (!validatePincode($pincode)) {
+        $errors[] = "Pincode must be 6 digits";
+    }
+    
+    // Validate and sanitize Educational Information
+    $qualification = isset($_POST['qualification']) ? sanitizeInput($_POST['qualification']) : '';
+    if (empty($qualification)) {
+        $errors[] = "Highest qualification is required";
+    }
+    
+    $institution = isset($_POST['institution']) ? sanitizeInput($_POST['institution']) : '';
+    if (empty($institution)) {
+        $errors[] = "Institution name is required";
+    }
+    
+    $yearOfPassing = isset($_POST['yearOfPassing']) ? sanitizeInput($_POST['yearOfPassing']) : '';
+    if (empty($yearOfPassing)) {
+        $errors[] = "Year of passing is required";
+    }
+    
+    $percentage = isset($_POST['percentage']) ? sanitizeInput($_POST['percentage']) : '';
+    if (empty($percentage)) {
+        $errors[] = "Percentage/CGPA is required";
+    }
+    
+    // Validate and sanitize Course Selection
+    $course = isset($_POST['course']) ? sanitizeInput($_POST['course']) : '';
+    if (empty($course)) {
+        $errors[] = "Course selection is required";
+    }
+    
+    $batch = isset($_POST['batch']) ? sanitizeInput($_POST['batch']) : '';
+    if (empty($batch)) {
+        $errors[] = "Batch selection is required";
+    }
+    
+    // Process interests (checkbox array)
+    $interests = array();
+    if (isset($_POST['interests']) && is_array($_POST['interests'])) {
+        foreach ($_POST['interests'] as $interest) {
+            $interests[] = sanitizeInput($interest);
+        }
+    }
+    
+    // Optional fields
+    $comments = isset($_POST['comments']) ? sanitizeInput($_POST['comments']) : '';
+    $terms = isset($_POST['terms']) ? true : false;
+    
+    if (!$terms) {
+        $errors[] = "You must agree to the terms and conditions";
+    }
+    
+    // Check if there are any errors
+    if (!empty($errors)) {
+        $response['success'] = false;
+        $response['message'] = implode(', ', $errors);
+        echo json_encode($response);
+        exit;
+    }
+    
+    // If validation passes, prepare data for display
+    $formData = array(
+        'fullName' => $fullName,
+        'email' => $email,
+        'phone' => $phone,
+        'dob' => $dob,
+        'gender' => $gender,
+        'address' => $address,
+        'city' => $city,
+        'state' => $state,
+        'pincode' => $pincode,
+        'qualification' => $qualification,
+        'institution' => $institution,
+        'yearOfPassing' => $yearOfPassing,
+        'percentage' => $percentage,
+        'course' => $course,
+        'batch' => $batch,
+        'interests' => $interests,
+        'comments' => $comments,
+        'terms' => $terms
+    );
+    
+    // Optional: Save to database or file here
+    // For this example, we'll just return the data
+    
+    // Optional: Save to a text file for record keeping
+    $recordFile = 'registrations.txt';
+    $recordData = "\n=== New Registration ===\n";
+    $recordData .= "Date/Time: " . date('Y-m-d H:i:s') . "\n";
+    $recordData .= "Name: " . $fullName . "\n";
+    $recordData .= "Email: " . $email . "\n";
+    $recordData .= "Phone: " . $phone . "\n";
+    $recordData .= "Course: " . $course . "\n";
+    $recordData .= "=======================\n";
+    
+    // Append to file  
+    file_put_contents($recordFile, $recordData, FILE_APPEND);
+    
+    // Return success response with form data
+    $response['success'] = true;
+    $response['message'] = "Registration successful!";
+    $response['formData'] = $formData;
+    
+    echo json_encode($response);
+    
+} else {
+    // Not a POST request
+    $response['success'] = false;
+    $response['message'] = "Invalid request method. Please use POST.";
+    echo json_encode($response);
+}
+?>
